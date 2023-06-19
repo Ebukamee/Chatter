@@ -49,7 +49,7 @@ export default function Signup() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === confirm) {
-      dispatch(registerInitiate(email, password, displayName, confirm));
+      dispatch(registerInitiate(email, password, displayName));
       console.log(state);
       console.log(authError);
       console.log(Cuser);

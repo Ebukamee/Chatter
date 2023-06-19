@@ -1,7 +1,7 @@
 import * as types from './typeactions';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile,signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase/firebase';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Dispatch } from 'redux';
 
 const loginStart = () => ({
@@ -70,7 +70,7 @@ export const loginInitiate = (email: string, password: string) => {
   };
 };
 
-export const registerInitiate = (email: string, password: string, displayName: string, confirm: string) => {
+export const registerInitiate = (email: string, password: string, displayName: string) => {
   return function (dispatch: Dispatch) {
     dispatch(registerStart());
     createUserWithEmailAndPassword(auth, email, password)

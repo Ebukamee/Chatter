@@ -1,0 +1,33 @@
+@import '/src/index.css';
+
+nav ul li{
+    display: inline-block;
+    margin: 0 7px;
+    font-weight: 700;
+}
+nav h1, .button-area {
+    display: inline-block;
+    margin:5px  0;
+}
+.logo {
+    color: var(--blue);
+}
+nav {
+    display: grid;
+    grid-template-columns: 35% 45% 20%;
+    width: 90%;
+    margin:10px 5%;
+}
+.button-area button {
+    margin: 0 10px;
+}
+button {
+    background-color: var(--blue);
+    color:#fff ;
+    border: 1px solid var(--blue);
+}
+.login-btn {
+    background-color: var(--white);
+    border: 1px solid var(--blue);
+    color:var(--black);
+}

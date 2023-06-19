@@ -1,0 +1,17 @@
+@import '/src/index.css';
+
+.footer{
+    box-sizing: border-box;
+    margin-top: 50px;
+    padding: 20px 5%;
+    display: grid;
+    grid-template-columns: 40% 20% 20% 20%;
+    background: var(--pink);
+}
+.footer div {
+    margin: 0 5%;
+    margin-bottom: 50px;
+}
+.footer .logo {
+    margin-top: 10px;
+}

@@ -1,21 +1,33 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { logOut } from "../actions/authActions";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../reducer/rootreducer";
+import { AnyAction } from "redux";
+
+type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 
 export default function ButtonArea() {
     const { Cuser } = useSelector((state: any) => state.auth);
-    if (Cuser) {
+    const dispatch = useDispatch<AppDispatch>();
+    
+    const handleLogOut = () => {
+        dispatch(logOut())
+    }
+    if (!Cuser) {
         return(
-            <div className="logout">
-                <div className="profile"></div>
-                <button>Log out</button>
-            </div>
+            <div className="button-area">
+            <Link to='/login'><button className='login-btn'>Log in</button></Link>
+            <Link to='/signup'><button>Sign Up</button></Link>
+          </div>
         );
     }
 
     return(
-        <div className="button-area">
-            <Link to='/login'><button className='login-btn'>Log in</button></Link>
-            <Link to='/signup'><button>Sign Up</button></Link>
-          </div>
+          <div className="logout">
+          <div className="profile"></div>
+          <button onClick={handleLogOut}>Log out</button>
+      </div>
     );
 }

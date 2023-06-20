@@ -1,6 +1,6 @@
 import * as types from './typeactions';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile,signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase/firebase';
+import { auth, googleProvider,faceBookProvider } from '../firebase/firebase';
 // import { useNavigate } from 'react-router-dom';
 import { Dispatch } from 'redux';
 
@@ -57,6 +57,18 @@ const googleInFail = (error: any) => ({
   type: types.GOOGLE_LOGIN_FAIL,
   payload: error,
 });
+const facebookInStart = () => ({
+  type: types.FACEBOOK_LOGIN_START,
+});
+
+const facebookInSuccess = () => ({
+  type: types.FACEBOOK_LOGIN_SUCCESS,
+});
+
+const facebookInFail = (error: any) => ({
+  type: types.FACEBOOK_LOGIN_FAIL,
+  payload: error,
+});
 
 export const loginInitiate = (email: string, password: string) => {
   return function (dispatch: Dispatch) {
@@ -96,6 +108,17 @@ export const googleInitiate =   () => {
   };
 };
 
+export const facebookInitiate =   () => {
+  return async function (dispatch: Dispatch) {
+    dispatch(facebookInStart());
+    await signInWithPopup(auth, faceBookProvider)
+      .then(() => {
+        dispatch(facebookInSuccess());
+        console.log('Success');
+      })
+      .catch((error) => dispatch(facebookInFail(error.message)));
+  };
+};
 export const logOut = () => {
   return function (dispatch: Dispatch) {
     dispatch(logoutStart());

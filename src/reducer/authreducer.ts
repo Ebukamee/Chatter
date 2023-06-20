@@ -94,6 +94,24 @@ const authReducer = (state = initState, action: any): AuthState => {
         loading: false,
         authError: action.payload,
       };
+      case types.FACEBOOK_LOGIN_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FACEBOOK_LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        authError: null,
+        Cuser: action.payload,
+      };
+    case types.FACEBOOK_LOGIN_FAIL:
+      return {
+        ...state,
+        loading: false,
+        authError: action.payload,
+      };
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import "../assets/styles/login.css";
-import  { useState, ChangeEvent, FormEvent } from "react";
+import  { useState, ChangeEvent, FormEvent,useEffect } from "react";
 import Fb from '../assets/images/icons8-facebook.svg';
 import Google from '../assets/images/google.svg'
 import { AnyAction } from "redux";
@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loginInitiate } from "../actions/authActions";
 import { googleInitiate } from "../actions/authActions";
+import { facebookInitiate } from "../actions/authActions";
+import { useNavigate } from "react-router-dom";
 
 type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 
@@ -18,17 +20,26 @@ interface LoginState {
   password: string;
 }
 
-
 export default function Login() {
   const [state, setState] = useState<LoginState>({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate()
   const  {email,password} = state
   const dispatch = useDispatch<AppDispatch>();
   const { Cuser } = useSelector((state: any) => state.auth);
   const { authError } = useSelector((state: any) => state.auth);
   const { loading } = useSelector((state: any) => state.auth);
+
+  useEffect(() => {
+    if(Cuser) {
+      navigate('/')
+    }
+  
+    else return;
+  }, [navigate, Cuser])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,6 +61,10 @@ export default function Login() {
   }
    const handleGoogleLogin = () => {
     dispatch(googleInitiate())
+   }
+
+   const handleFacebookLogin = () => {
+    dispatch(facebookInitiate())
    }
 
   return (
@@ -82,7 +97,7 @@ export default function Login() {
             <img src={Google} alt="" className="icon" />
             <span className="btn">Log in with google</span>
         </button>
-        <button className="socials">
+        <button className="socials" onClick={handleFacebookLogin}>
             <img src={Fb} alt="" className="icon" />
             <span className="btn">Log in with facebook</span>
         </button>

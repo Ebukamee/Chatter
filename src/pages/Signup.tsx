@@ -76,28 +76,28 @@ export default function Signup() {
             <div className="inside">
               <label htmlFor="first_name">First Name</label>
               <div className="input">
-                <input type="text" name="First_Name" id="first_name" onChange={handleChange}/>
+                <input type="text" name="First_Name" id="first_name" onChange={handleChange} required/>
               </div>
             </div>
             <div></div>
             <div className="inside">
               <label htmlFor="Last_name">Last Name</label>
               <div className="input">
-                <input type="text" name="Last_Name" id="last_name" onChange={handleChange}/>
+                <input type="text" name="Last_Name" id="last_name" onChange={handleChange} required/>
               </div>
             </div>
           </div>
           <label htmlFor="email">Email Address</label>
           <div className="input">
-            <input type="email" name="email" id="email" onChange={handleChange}/>
+            <input type="email" name="email" id="email" onChange={handleChange} required/>
           </div>
           <label htmlFor="email">Password</label>
           <div className="input">
-            <input type="password" name="password" id="password" onChange={handleChange}/>
+            <input type="password" name="password" id="password" onChange={handleChange} required/>
           </div>
           <label htmlFor="email">Confirm Password</label>
           <div className="input">
-            <input type="password" name="confirm" id="password" onChange={handleChange}/>
+            <input type="password" name="confirm" id="password" onChange={handleChange} required/>
           </div>
           <p className="error">{authError ? authError : ''}</p>
           <button>{loading ? 'Loading...' : 'Create Account'}</button>

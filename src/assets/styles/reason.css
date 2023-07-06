@@ -25,3 +25,12 @@
     box-sizing: border-box;
     padding: 3%;
 }
+@media (max-width : 750px) {
+    .other {
+        display: flex;
+        flex-direction: column;
+    }
+    .inner {
+        margin-top: 20px;
+    }
+}

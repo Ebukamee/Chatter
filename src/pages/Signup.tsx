@@ -100,7 +100,7 @@ export default function Signup() {
             <input type="password" name="confirm" id="password" onChange={handleChange} required/>
           </div>
           <p className="error">{authError ? authError : ''}</p>
-          <button>{loading ? 'Loading...' : 'Create Account'}</button>
+          <button className="form_button">{loading ? 'Loading...' : 'Create Account'}</button>
         </form>
         <button className="socials">
           <img src={Google} alt="" className="icon" />

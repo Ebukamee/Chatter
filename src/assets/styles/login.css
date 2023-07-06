@@ -60,3 +60,22 @@ form button{
     display: grid;
     grid-template-columns: 47.5% 5% 47.5%;
 }
+
+@media (max-width : 750px) {
+    .login {
+        display: block;
+    }
+    .form {
+        padding: 5%;
+    }
+    .socials {
+        width: 70%;
+        margin: 10px auto;
+
+    }
+    .form_button{
+        width: 80%;
+        display: grid;
+        margin: auto;
+    }
+}

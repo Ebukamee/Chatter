@@ -91,7 +91,7 @@ export default function Login() {
             <input type="password" name="password" id="password" onChange={handleChange}/>
           </div>
           <p className="error">{authError ? authError : ''}</p>
-          <button>{loading ? 'Loading...' : 'Log In'}</button>
+          <button className="form_button">{loading ? 'Loading...' : 'Log In'}</button>
         </form>
         <button className="socials" onClick={handleGoogleLogin}>
             <img src={Google} alt="" className="icon" />

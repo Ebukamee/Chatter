@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "../reducer/rootreducer";
 import { AnyAction } from "redux";
+import '../assets/styles/nav.css'
 
 type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 
@@ -18,8 +19,8 @@ export default function ButtonArea() {
     if (!Cuser) {
         return(
             <div className="button-area">
-            <Link to='/login'><button className='login-btn'>Log in</button></Link>
-            <Link to='/signup'><button>Sign Up</button></Link>
+            <Link to='/login' className="no"><button className='login-btn'>Log in</button></Link>
+            <Link to='/signup' className="no"><button>Sign Up</button></Link>
           </div>
         );
     }

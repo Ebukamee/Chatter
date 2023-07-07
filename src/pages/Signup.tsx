@@ -10,6 +10,7 @@ import Google from "../assets/images/google.svg";
 import { ThunkDispatch } from "redux-thunk";
 // import { AnyAction } from "redux";
 import { RootState } from "../reducer/rootreducer";
+import AuthNav from "../components/authNav";
 
 type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 
@@ -69,7 +70,9 @@ export default function Signup() {
         </p>
       </div>
       <div className="form">
+        <AuthNav />
         <form onSubmit={handleSubmit}>
+
           <h2>Create Account</h2>
 
           <div className="name">

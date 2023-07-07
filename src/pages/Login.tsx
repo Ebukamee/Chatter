@@ -11,6 +11,7 @@ import { loginInitiate } from "../actions/authActions";
 import { googleInitiate } from "../actions/authActions";
 import { facebookInitiate } from "../actions/authActions";
 import { useNavigate } from "react-router-dom";
+import AuthNav from "../components/authNav";
 
 type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 
@@ -79,6 +80,7 @@ export default function Login() {
         </p>
       </div>
       <div className="form">
+      <AuthNav />
         <form onSubmit={handleSubmit}>
           <h2>Welcome back</h2>
 

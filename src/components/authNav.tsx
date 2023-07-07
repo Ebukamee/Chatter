@@ -1,9 +1,11 @@
-// import NavLink from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+import '../assets/styles/authnav.css';
 
-// export default function authNav() {
-//     return(
-//         <div className="authNav">
-//             <NavLink to='' >Login</NavLink>
-//         </div>
-//     );
-// }
+export default function AuthNav() {
+    return(
+        <div className="authNav">
+            <NavLink to='/signup' className={({isActive}) => isActive ? 'auth_blue' : 'auth'} id="reg">REGISTER</NavLink>
+            <NavLink to='/login'className={({isActive}) => isActive ? 'auth_blue' : 'auth'} id="log">LOG IN</NavLink>
+        </div>
+    );
+}

@@ -1,0 +1,24 @@
+@import '/src/index.css';
+
+.authNav {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+.auth,.auth_blue {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: bold;
+    padding: 5% 0;
+    border-bottom: 5px solid var(--light_gray);
+    width: 50%;
+}
+.auth_blue {
+    border-bottom: 5px solid var(--blue);
+}
+#reg {
+    text-align: left;
+}
+#log {
+    text-align: right;
+}

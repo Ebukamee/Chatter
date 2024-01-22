@@ -1,4 +1,5 @@
 import "../assets/styles/nav.css";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import ButtonArea from "./button-area";
 import Open from "../assets/images/icon-menu.svg";
@@ -22,10 +23,12 @@ export default function Nav() {
       <nav className="desktop">
         <h1 className="logo">CHATTER</h1>
         <ul>
-          <li>Home</li>
+        <ul>
+          <li><NavLink to='/' className={({isActive}) => isActive ? 'blue' : 'link'}>Home</NavLink></li>
           <li>About Us</li>
           <li>Contact</li>
-          <li>Blogs</li>
+         <li> <NavLink to='/blog' className={({isActive}) => isActive ? 'blue' : 'link'}>Blog</NavLink></li>
+        </ul>
         </ul>
         <ButtonArea />
       </nav>
@@ -36,10 +39,10 @@ export default function Nav() {
       </nav>
       <div className={Name}>
         <ul>
-          <li>Home</li>
+          <li><NavLink to='/' className={({isActive}) => isActive ? 'blue' : 'link'}>Home</NavLink></li>
           <li>About Us</li>
           <li>Contact</li>
-          <li>Blogs</li>
+         <li> <NavLink to='/blog' className={({isActive}) => isActive ? 'blue' : 'link'}>Blog</NavLink></li>
         </ul>
         <ButtonArea />
       </div>

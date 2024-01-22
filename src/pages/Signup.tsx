@@ -1,5 +1,5 @@
-import  { useState, ChangeEvent, FormEvent } from "react";
-// import { Link, useNavigate } from "react-router-dom";
+import  { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import {  useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AnyAction } from 'redux';
 import { registerInitiate } from "../actions/authActions";
@@ -11,6 +11,7 @@ import { ThunkDispatch } from "redux-thunk";
 // import { AnyAction } from "redux";
 import { RootState } from "../reducer/rootreducer";
 import AuthNav from "../components/authNav";
+import Nav from "../components/Nav";
 
 type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 
@@ -18,24 +19,34 @@ type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 interface SignupState {
   email: string;
   password: string;
-  displayName: string;
+  First_Name: string;
+  Last_Name: string;
   confirm: string;
 }
 
 export default function Signup() {
+  const navigate = useNavigate()
   const [state, setState] = useState<SignupState>({
     email: "",
     password: "",
-    displayName: "",
+    First_Name:'', 
+    Last_Name: '',
     confirm: "",
   });
 
-  const { email, password, confirm, displayName } = state;
+  const { email, password, confirm, First_Name, Last_Name} = state;
 
   const dispatch = useDispatch<AppDispatch>();
   const { Cuser } = useSelector((state: any) => state.auth);
   const { authError } = useSelector((state: any) => state.auth);
   const { loading } = useSelector((state: any) => state.auth);
+  useEffect(() => {
+    if(Cuser) {
+      navigate('/')
+    }
+  
+    else return;
+  }, [navigate, Cuser])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,11 +61,10 @@ export default function Signup() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === confirm) {
-      dispatch(registerInitiate(email, password, displayName));
-      console.log(state);
-      console.log(authError);
-      console.log(Cuser);
-    } else {
+      dispatch(registerInitiate(email, password, `${First_Name} ${Last_Name}`));
+    }
+    
+ else {
       alert("Password does not match");
       window.location.reload();
     }

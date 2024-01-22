@@ -4,6 +4,7 @@ interface AuthState {
   authError: null | string;
   loading: boolean;
   Cuser: null | any;
+  Profile:any
   logout: boolean;
 }
 
@@ -12,6 +13,7 @@ const initState: AuthState = {
   loading: false,
   Cuser: null,
   logout: false,
+  Profile: {}
 };
 
 const authReducer = (state = initState, action: any): AuthState => {
@@ -27,6 +29,18 @@ const authReducer = (state = initState, action: any): AuthState => {
         loading: false,
         authError: null,
         Cuser: action.payload,
+      };
+      case 'UPLOAD_PROFILE_SUCCESS':
+      return {
+        ...state,
+        authError: '',
+        Profile: action.payload,
+      };
+      case 'UPLOAD_PROFILE_FAILURE':
+      return {
+        ...state,
+        authError: action.payload,
+        Profile: {},
       };
     case types.LOGIN_FAIL:
       return {

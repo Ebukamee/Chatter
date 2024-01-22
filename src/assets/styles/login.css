@@ -22,7 +22,61 @@
 .form{
     padding:5% 25%;
 }
-form input {
+.flex, .flexbox{
+    display: flex;
+}
+.flex {
+    align-items: center;
+}
+div.flex h4 {
+    margin-left: 10px;
+}
+.flexbox button {
+    height: fit-content;
+    font-size: 12px;
+}
+.flex img {
+    width: 12px;
+}
+.post_container {
+    width: 80%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 10px 2%;
+    border: 1px solid var(--a_gray);
+    border-radius: 7px;
+}
+.post_container img {
+    width: 100%;
+    height: 150px;
+    border-radius: 7px;
+    object-fit: cover;
+}
+.flexbox {
+    align-items: baseline;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+}
+.flexbox p, .post_container p {
+    font-size: 13px;
+    color: var(--black);
+}
+#profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.main_box {   
+    box-sizing: border-box;
+    border: 1px solid var(--a_gray);
+    margin:  auto;
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 850px;
+    border-radius: 7px;
+}
+form input, textarea {
     border: none;
     outline: none;
     width: 90%;
@@ -60,7 +114,22 @@ form button{
     display: grid;
     grid-template-columns: 47.5% 5% 47.5%;
 }
-
+textarea{
+    height: 150px;
+}
+.blog {
+    max-width: 700px;
+    width: 90%;
+    margin: auto;
+}
+.edit {
+    width:90%;
+    max-width: 600px;
+    margin: auto;
+}
+.notEdit, .notEdit input {
+    background-color: rgb(234, 242, 239);
+}
 @media (max-width : 750px) {
     .login {
         display: block;
@@ -74,7 +143,7 @@ form button{
 
     }
     .form_button{
-        width: 80%;
+        width: 100%;
         display: grid;
         margin: auto;
     }

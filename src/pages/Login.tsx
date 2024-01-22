@@ -56,9 +56,8 @@ export default function Login() {
     if (email && password) {
       dispatch(loginInitiate(email,password))
     }
-    console.log(Cuser)
-    console.log(authError)
-    // navigate('/dashboard')
+    
+    navigate('/')
   }
    const handleGoogleLogin = () => {
     dispatch(googleInitiate())

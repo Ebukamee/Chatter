@@ -2,10 +2,12 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider,FacebookAuthProvider,getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDdl8quRMFFoHE0BybxOFVyyPtE_sH5N9o",
   authDomain: "chatter-1aa84.firebaseapp.com",
   projectId: "chatter-1aa84",
@@ -17,6 +19,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const db = getFirestore();
+export const storage = getStorage()
 export const auth = getAuth(app)
 export const googleProvider = new GoogleAuthProvider()
 export const faceBookProvider = new FacebookAuthProvider()

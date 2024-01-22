@@ -23,7 +23,7 @@ interface BlogDetailProps {
     <>
       <Nav />
       <div className="contain">
-        {posts && posts.map(post => {
+        {posts && posts.map((post:any) => {
           return (
             <>
             <div className="coverimage">

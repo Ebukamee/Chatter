@@ -4,7 +4,7 @@ import Summary from "./Summary";
     console.log(posts)
     return (
         <div className="blog_list">
-            {posts && posts.map(post => {
+            {posts && posts.map((post: any) => {
                 return (
                     <Summary post = {post} key={post.id}/>
                 )

@@ -1,13 +1,12 @@
 import { createStore, applyMiddleware, Middleware, compose } from "redux";
 import logger from "redux-logger";
-import thunk, { ThunkMiddleware, ThunkDispatch } from 'redux-thunk';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 import rootReducer, { RootState } from "../reducer/rootreducer";
-import { getFirestore, reduxFirestore, createFirestoreInstance } from "redux-firestore";
-import { getFirebase, reactReduxFirebase } from "react-redux-firebase";
+import { getFirestore, reduxFirestore } from "redux-firestore";
 import { firebaseConfig } from "../firebase/firebase";
 
 
-const middleware: Middleware[] = [thunk.withExtraArgument({ getFirestore, getFirebase })];
+const middleware: Middleware[] = [thunk.withExtraArgument({ getFirestore })];
 
 if (process.env.NODE_ENV === 'development') {
   middleware.push(logger);

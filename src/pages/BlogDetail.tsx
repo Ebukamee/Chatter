@@ -1,6 +1,5 @@
 import Nav from "../components/Nav";
 import '../assets/styles/detail.css';
-import Image from '../assets/images/background.png';
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getPost } from "../actions/postActions";

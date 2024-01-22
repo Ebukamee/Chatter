@@ -11,7 +11,6 @@ import { ThunkDispatch } from "redux-thunk";
 // import { AnyAction } from "redux";
 import { RootState } from "../reducer/rootreducer";
 import AuthNav from "../components/authNav";
-import Nav from "../components/Nav";
 
 type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 

@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
-import { RootState } from "../reducer/rootreducer";
+// import { RootState } from "../reducer/rootreducer";
 // import { getFirestore } from "redux-firestore";
 import { db, storage } from "../firebase/firebase";
-import { collection,getDocs,doc, orderBy,addDoc,getDoc } from "firebase/firestore";
+import { collection,getDocs,doc,addDoc,getDoc } from "firebase/firestore";
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 // import { getFirebase } from "react-redux-firebase"; 
 
 // export function createPost(post: any) {
@@ -91,7 +91,7 @@ export const createPost = (Title: any, Content: any, Author:string) => async (di
     dispatch({ type: 'UPLOAD_POST_FAILURE', payload: error.message });
   }
 };
-export const addToProfile = (Title: any,Content: any,Id: any) => async (dispatch:Dispatch) => {
+export const addToProfile = (Title: any,Content: any,Id: any) => async () => {
   try {
     await setTimeout(() => {
       const Ref = addDoc(collection(db, `userdetails/posts/${Id}`), {
@@ -100,7 +100,9 @@ export const addToProfile = (Title: any,Content: any,Id: any) => async (dispatch
         Content,
         post_id  : PostId
       });
+      console.log(Ref)
     }, 3000);
+
   }
   catch (error: any) {
     console.log(error)

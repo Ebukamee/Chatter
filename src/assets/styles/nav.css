@@ -6,6 +6,7 @@ nav ul li{
 .link {
     color: black;
     text-decoration: none;
+    padding: 5% 5px;
 }
 ul li {
     display: grid;
@@ -24,9 +25,12 @@ nav h1, .button-area {
     text-decoration: none;
     color: var(--black);
     font-weight: bold;
-    padding: 5% 5px;
     border-bottom: 2px solid var(--blue);
-    width: 50%;
+    padding: 5% 5px;
+}
+.blueNav {
+    color: var(--blue);
+    text-decoration: none;
 }
 nav.desktop {
     display: grid;
@@ -56,7 +60,11 @@ nav.mobile {
 .menu_close,.menu{
     display: none;
 }
-
+div.profile {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
 @media (max-width : 750px) {
     nav.desktop {
         display: none;
@@ -88,6 +96,7 @@ nav.mobile {
     }
     ul li {
         margin: 15px 0;
+        width: 100%;
     }
    .button-area {
     display: flex;
@@ -98,4 +107,15 @@ nav.mobile {
    .button-area  .no {
     margin-top: 20px;
    }
+   div.logout {
+    width: 90%;
+    margin-left: 10%;
+   }
+   div.profile {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+    justify-content: space-around;
+}
 }

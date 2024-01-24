@@ -39,10 +39,10 @@ export default function Nav() {
       </nav>
       <div className={Name}>
         <ul>
-          <li><NavLink to='/' className={({isActive}) => isActive ? 'blue' : 'link'}>Home</NavLink></li>
+          <li><NavLink to='/' className={({isActive}) => isActive ? 'blueNav' : 'link'}>Home</NavLink></li>
           <li>About Us</li>
           <li>Contact</li>
-         <li> <NavLink to='/blog' className={({isActive}) => isActive ? 'blue' : 'link'}>Blog</NavLink></li>
+         <li> <NavLink to='/blog' className={({isActive}) => isActive ? 'blueNav' : 'link'}>Blog</NavLink></li>
         </ul>
         <ButtonArea />
       </div>

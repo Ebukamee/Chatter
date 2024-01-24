@@ -1,0 +1,24 @@
+.postImage {
+    width: 100%;
+    max-width: 750px;
+    object-fit: cover;
+    /* height: 20px; */
+}
+hr {
+    margin-top: 50px;
+}
+.time_person {
+    margin-bottom: 80px;
+}
+.time_person,.move {
+    width: 95%;
+    margin: auto;
+}
+div.content {
+    margin: auto;
+    margin-top: 70px;
+   width: 95%;
+}
+h2.title {
+    margin-left: 50px;
+}

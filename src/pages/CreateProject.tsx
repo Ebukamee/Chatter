@@ -12,7 +12,7 @@ interface ProjectFormState {
     image:string
   }
 
-function CreateProjectForm(props:any) {
+function CreateProjectForm(props:any): any {
     const [state, setState] = useState<ProjectFormState>({
         title: "",
         content: "",
@@ -34,14 +34,20 @@ function CreateProjectForm(props:any) {
       const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (selectedFile) {
-          props.uploadImage(selectedFile);
-          setTimeout(() => {
-            props.createPost(state.title,state.content,Cuser.displayName)
-          }, 2000);
+          props.uploadImage(selectedFile).then(() => {
+            setTimeout(() => {
+            props.createPost(state.title,state.content,Cuser.displayName,Cuser.photoURL,Cuser.uid)
+          }, 3000);
+          });
           setTimeout(() => {
             props.addToProfile(state.title,state.content,Cuser.uid)
-          }, 2500);
-        }
+          }, 6000);
+          setTimeout(() => {
+            alert('Post Uploaded Succesfully');
+            window.location.replace('/blog')
+          }, 11000);
+
+         }
         else {
           console.log('Lol')
         }
@@ -54,6 +60,7 @@ function CreateProjectForm(props:any) {
         }));
         console.log(state)
       };
+    if (Cuser) {
     return (
        <>
        <Nav />
@@ -75,6 +82,7 @@ function CreateProjectForm(props:any) {
         </form>
        </>
     );
+    }
 }
 
 const mapStateToProps = (state:any) => {

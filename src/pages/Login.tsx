@@ -1,6 +1,5 @@
 import "../assets/styles/login.css";
 import  { useState, ChangeEvent, FormEvent,useEffect } from "react";
-import Fb from '../assets/images/icons8-facebook.svg';
 import Google from '../assets/images/google.svg'
 import { AnyAction } from "redux";
 import { RootState } from "../reducer/rootreducer";
@@ -9,7 +8,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loginInitiate } from "../actions/authActions";
 import { googleInitiate } from "../actions/authActions";
-import { facebookInitiate } from "../actions/authActions";
 import { useNavigate } from "react-router-dom";
 import AuthNav from "../components/authNav";
 
@@ -55,17 +53,16 @@ export default function Login() {
     e.preventDefault();
     if (email && password) {
       dispatch(loginInitiate(email,password))
+      if (Cuser) {
+        navigate('/blog')
+      }
     }
-    
-    navigate('/')
+
   }
    const handleGoogleLogin = () => {
     dispatch(googleInitiate())
    }
 
-   const handleFacebookLogin = () => {
-    dispatch(facebookInitiate())
-   }
 
   return (
     <div className="login">
@@ -97,10 +94,6 @@ export default function Login() {
         <button className="socials" onClick={handleGoogleLogin}>
             <img src={Google} alt="" className="icon" />
             <span className="btn">Log in with google</span>
-        </button>
-        <button className="socials" onClick={handleFacebookLogin}>
-            <img src={Fb} alt="" className="icon" />
-            <span className="btn">Log in with facebook</span>
         </button>
       </div>
     </div>

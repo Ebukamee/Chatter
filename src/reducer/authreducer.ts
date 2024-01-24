@@ -34,13 +34,13 @@ const authReducer = (state = initState, action: any): AuthState => {
       return {
         ...state,
         authError: '',
-        Profile: action.payload,
+        Cuser: action.payload,
       };
       case 'UPLOAD_PROFILE_FAILURE':
       return {
         ...state,
         authError: action.payload,
-        Profile: {},
+        Cuser: {},
       };
     case types.LOGIN_FAIL:
       return {

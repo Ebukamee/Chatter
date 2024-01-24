@@ -5,10 +5,13 @@ import { fetchData } from "../actions/postActions";
 import { useEffect } from "react";
 import edit from '../assets/images/edit.svg'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Load from "../components/loader";
 
 
 
 function Bloglist(props: any) {
+    const { Cuser } = useSelector((state: any) => state.auth);
     useEffect(() => {
         props.fetchData();  // Dispatch the action
     }, []);
@@ -17,8 +20,14 @@ function Bloglist(props: any) {
     console.log(posts);
 const navigate = useNavigate();
 const Create = () => {
-    navigate('/create')
+    navigate(Cuser ? '/create' : '/blog')
 }
+if (posts.length == 0) {
+    return (
+        <Load />
+    )
+}
+document.title = 'Chatter | Blog'
     return (
         <>
             <Nav />
@@ -28,7 +37,7 @@ const Create = () => {
                         <h2>Feed</h2>
                         <p>Explore different content you'll love</p>
                     </div>
-                    <button className="flex" onClick={Create}><img src={edit} alt="not" />Post a Content</button>
+                    {Cuser ? <button className="flex" onClick={Create}><img src={edit} alt="not" />Post a Content</button> : null}
                 </div>
               <List posts={posts} />
             </div>

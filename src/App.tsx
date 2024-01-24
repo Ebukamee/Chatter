@@ -12,6 +12,7 @@ import Login from './pages/Login'
 import './App.css'
 import { User } from 'firebase/auth'
 import Edit from './pages/editProfile'
+import Profile from './pages/Profile'
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
       <Route path='/post/:id' element={<BlogDetail />} />
       <Route path='/blog' element={<Bloglist />} />
       <Route path='/edit_profile' element={<Edit />} />
+      <Route path='/profile' element={<Profile />} />
    </Routes>
     </>
   )

@@ -6,7 +6,7 @@ import Summary from "./Summary";
         <div className="blog_list">
             {posts && posts.map((post: any) => {
                 return (
-                    <Summary post = {post} key={post.id}/>
+                    <Summary post = {post} key={post.id} />
                 )
             })}
 </div>

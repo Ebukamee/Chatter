@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 // import { RootState } from "../reducer/rootreducer";
 // import { getFirestore } from "redux-firestore";
 import { db, storage } from "../firebase/firebase";
-import { collection,getDocs,doc,addDoc,getDoc } from "firebase/firestore";
+import { collection,getDocs,doc,addDoc,getDoc,orderBy,query } from "firebase/firestore";
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage";
 // import { useSelector } from "react-redux";
 // import { getFirebase } from "react-redux-firebase"; 
@@ -26,9 +26,9 @@ import { ref, uploadBytes,getDownloadURL } from "firebase/storage";
 export const fetchData = () => async (dispatch: Dispatch) => {
   try {
     const data:any = [];
-    const latest =await getDocs(collection(db,'posts'));
-
-    latest.forEach((doc) => {
+    const latest = query(collection(db,'posts'), orderBy('PostedOn',"desc"));
+const Ref = await getDocs(latest)
+    Ref.forEach((doc) => {
       console.log(doc)
       data.push({ id: doc.id, ...doc.data() });
     });
@@ -36,6 +36,21 @@ export const fetchData = () => async (dispatch: Dispatch) => {
     dispatch({ type: 'FETCH_DATA_SUCCESS', payload: data });
   } catch (error:any) {
     dispatch({ type: 'FETCH_DATA_FAILURE', payload: error.message });
+  }
+};
+export const fetchMyPost = (Id : any) => async (dispatch: Dispatch) => {
+  try {
+    const data:any = [];
+    const latest = query(collection(db,`userdetails/posts/${Id}`), orderBy('PostedOn',"desc"));
+const Ref = await getDocs(latest)
+    Ref.forEach((doc) => {
+      console.log(doc)
+      data.push({ id: doc.id, ...doc.data() });
+    });
+    console.log(data)
+    dispatch({ type: 'FETCH_MY_POST_SUCCESS', payload: data });
+  } catch (error:any) {
+    dispatch({ type: 'FETCH_MY_POST_FAILURE', payload: error.message });
   }
 };
 let Url = '';
@@ -68,24 +83,23 @@ catch (error:any) {
 }
 }
 
-export const createPost = (Title: any, Content: any, Author:string) => async (dispatch: Dispatch) => {
+export const createPost = (Title: any, Content: any, Author:string,AuthorImage:string, AuthorId: any) => async (dispatch: Dispatch) => {
   try {
     // Simulating an asynchronous operation with setTimeout (remove this in the actual implementation)
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const docRef = await addDoc(collection(db, 'posts'), {
       Title,
       Url: Url,
       Content,
-      Author
+      Author,
+      AuthorImage,
+      AuthorId,
+      PostedOn: new Date()
     });
     PostId = docRef.id
     console.log(PostId)
     // Assuming you want to dispatch the ID of the newly created document
     dispatch({ type: 'UPLOAD_POST_SUCCESS', payload: docRef});
-    setTimeout(() => {
-      Url= ''
-    }, 1000);
   } catch (error: any) {
     console.error('Error adding item to Firestore:', error);
     dispatch({ type: 'UPLOAD_POST_FAILURE', payload: error.message });
@@ -98,9 +112,14 @@ export const addToProfile = (Title: any,Content: any,Id: any) => async () => {
         Title,
         Url: Url,
         Content,
+        PostedOn: new Date(),
         post_id  : PostId
       });
       console.log(Ref)
+
+      setTimeout(() => {
+        Url= ''
+      }, 1000);
     }, 3000);
 
   }
@@ -129,20 +148,3 @@ export const getPost = (Id:any) => async (dispatch:Dispatch) => {
 }
 }
 
-export const EditProfile = (Name:string, userName:string,email: string, phoneNumber:string, id: string) => async (dispatch: Dispatch) => {
-  try {
-    // Simulating an asynchronous operation with setTimeout (remove this in the actual implementation)
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    const docRef = await addDoc(collection(db, `userdetails/profile/${id}`), {
-      Name,
-      userName,
-      email,
-      phoneNumber
-    });
-    dispatch({ type: 'UPLOAD_PROFILE_SUCCESS', payload: docRef});
-  } catch (error: any) {
-    console.error('Error adding item to Firestore:', error);
-    dispatch({ type: 'UPLOAD_PROFILE_FAILURE', payload: error.message });
-  }
-};

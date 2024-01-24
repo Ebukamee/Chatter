@@ -3,6 +3,7 @@ interface BlogState {
   error: any;
   image: String;
   newPost: {};
+  myPost: {};
   individualPost: {};
 }
 
@@ -11,6 +12,7 @@ const initState: BlogState = {
   error: "",
   image: "",
   newPost: {},
+  myPost:{},
   individualPost: [],
 };
 
@@ -38,6 +40,10 @@ const Blogreducer = (state = initState, action: any): BlogState => {
       return { ...state, Post: action.payload, error: null };
     case "FETCH_DATA_FAILURE":
       return { ...state, Post: [], error: action.payload };
+      case "FETCH_MY_POST_SUCCESS":
+      return { ...state, myPost: action.payload, error: null };
+    case "FETCH_MY_DATA_FAILURE":
+      return { ...state, myPost: [], error: action.payload };
     default:
       return state;
   }

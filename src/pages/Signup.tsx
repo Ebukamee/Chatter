@@ -5,12 +5,12 @@ import { AnyAction } from 'redux';
 import { registerInitiate } from "../actions/authActions";
 import { useSelector } from "react-redux";
 import "../assets/styles/login.css";
-import Fb from "../assets/images/icons8-facebook.svg";
 import Google from "../assets/images/google.svg";
 import { ThunkDispatch } from "redux-thunk";
 // import { AnyAction } from "redux";
 import { RootState } from "../reducer/rootreducer";
 import AuthNav from "../components/authNav";
+import { googleInitiate } from "../actions/authActions";
 
 type AppDispatch = ThunkDispatch<RootState,any, AnyAction>;
 
@@ -56,13 +56,20 @@ export default function Signup() {
     console.log(state)
   };
 
-
+  const handleGoogleLogin = () => {
+    dispatch(googleInitiate())
+    if (Cuser) {
+      navigate('/edit_profile')
+    }
+   }
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === confirm) {
-      dispatch(registerInitiate(email, password, `${First_Name} ${Last_Name}`));
+      dispatch(registerInitiate(email, password, `${First_Name} ${Last_Name}`))
+      if (Cuser) {
+        navigate('/edit_profile')
+      }
     }
-    
  else {
       alert("Password does not match");
       window.location.reload();
@@ -114,13 +121,10 @@ export default function Signup() {
           <p className="error">{authError ? authError : ''}</p>
           <button className="form_button">{loading ? 'Loading...' : 'Create Account'}</button>
         </form>
-        <button className="socials">
-          <img src={Google} alt="" className="icon" />
+        <hr />
+        <button className="socials" onClick={handleGoogleLogin}>
+          <img src={Google} alt="" className="icon"/>
           <span className="btn">Sign up with google</span>
-        </button>
-        <button className="socials">
-          <img src={Fb} alt="" className="icon" />
-          <span className="btn">Sign up with facebook</span>
         </button>
       </div>
     </div>

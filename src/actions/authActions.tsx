@@ -1,7 +1,8 @@
 import * as types from './typeactions';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile,signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider,faceBookProvider } from '../firebase/firebase';
-// import { useNavigate } from 'react-router-dom';
+import { storage  } from '../firebase/firebase';
+import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 import { Dispatch } from 'redux';
 
 const loginStart = () => ({
@@ -128,6 +129,49 @@ export const logOut = () => {
   };
 };
 
+let Url = '';
+
+export const uploadImage = (Image:any) => async (dispatch : Dispatch) => {
+  try {
+    const Ref = ref(storage,"post" );
+            const ImagesRef = ref(Ref, Image.name)
+            Ref.name === ImagesRef.name; 
+            Ref.fullPath === ImagesRef.fullPath;  
+            const metadata = {
+                contentType: 'image/jpeg',
+              };
+            await uploadBytes(ImagesRef, Image, metadata).then((snapshot) => {
+                console.log(Image,snapshot);
+              });
+              
+            await setTimeout(() => {
+                getDownloadURL(ref(Ref,Image.name)).then((url) => {
+                   const data = url
+                   Url = data
+                    console.log(data)
+                    dispatch({type: 'UPLOAD_IMAGE_SUCCESS', payload:data})
+                })
+            }, 1000)
+}
+catch (error:any) {
+    console.error('Error adding image to Firestore Storage:', error);
+    dispatch({type: 'UPLOAD_IMAGE_FAILURE', payload:error})
+}
+}
+export const EditProfile = (user:any,Name:string) => async (dispatch: Dispatch) => {
+  try {
+    // Simulating an asynchronous operation with setTimeout (remove this in the actual implementation)
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    updateProfile(user, {
+      photoURL: Url,
+      displayName:Name
+    });
+    dispatch({ type: 'UPLOAD_PROFILE_SUCCESS', payload: user});
+  } catch (error: any) {
+    console.error('Error adding item to Firestore:', error);
+    dispatch({ type: 'UPLOAD_PROFILE_FAILURE', payload: error.message });
+  }
+};
 export const setUser = (user: any) => ({
   type: types.SET_USER,
   payload: user,

@@ -28,9 +28,6 @@
 .flex {
     align-items: center;
 }
-div.flex h4 {
-    margin-left: 10px;
-}
 .flexbox button {
     height: fit-content;
     font-size: 12px;
@@ -40,7 +37,7 @@ div.flex h4 {
 }
 .post_container {
     width: 80%;
-    margin: 0 auto;
+    margin: 30px auto;
     box-sizing: border-box;
     padding: 10px 2%;
     border: 1px solid var(--a_gray);
@@ -51,6 +48,10 @@ div.flex h4 {
     height: 150px;
     border-radius: 7px;
     object-fit: cover;
+}
+.details p, .details h4 {
+    margin: 0;
+    margin-left: 10px;
 }
 .flexbox {
     align-items: baseline;

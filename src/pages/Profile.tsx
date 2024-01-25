@@ -4,27 +4,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 import { logOut } from "../actions/authActions";
-import { fetchMyPost } from "../actions/postActions";
-import List from "../components/BlogList";
-import { connect } from "react-redux";
-import Load from "../components/loader";
-import { useEffect } from "react";
+import ProfileList from "../components/profileList";
 import "../assets/styles/profile.css";
 
-function Profile(props: any) {
+export default function Profile() {
   const { Cuser } = useSelector((state: any) => state.auth);
-  useEffect(() => {
-    setTimeout(() => {
-        props.fetchMyPost(Cuser.uid); 
-        console.log(props)
-        console.log(Cuser.uid)
-    }, 1000);// Dispatch the action
-    if (!Cuser) {
-        window.location.replace('/login')
-    } 
-  }, []);
-  document.title = 'Chatter | Profile'
-  const { posts } = props;
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogOut = () => {
@@ -33,13 +17,8 @@ function Profile(props: any) {
         window.location.replace('/login')
     }
   };
-    if (posts.length == 0) {
-      return (
-          <Load />
-      )
-  }
-  if (Cuser && posts.length!=0) {
-    return (
+  if (Cuser) {
+        return (
       <>
         <Nav />
         <div className="profile_container">
@@ -57,8 +36,7 @@ function Profile(props: any) {
           </div>
           <div className="main_box">
               <h3 className="heading">Your Posts</h3>
-              <List posts={posts} /> 
-
+              <ProfileList />
             </div>
         </div>
       </>
@@ -67,10 +45,4 @@ function Profile(props: any) {
   return <></>;
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    posts: state.blog.myPost, // Adjust this based on your state structure
-  };
-};
 
-export default connect(mapStateToProps, { fetchMyPost })(Profile);

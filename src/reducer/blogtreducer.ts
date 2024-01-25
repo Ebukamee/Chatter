@@ -3,7 +3,7 @@ interface BlogState {
   error: any;
   image: String;
   newPost: {};
-  myPost: {};
+  myPost: any;
   individualPost: {};
 }
 
@@ -12,7 +12,7 @@ const initState: BlogState = {
   error: "",
   image: "",
   newPost: {},
-  myPost:{},
+  myPost:null,
   individualPost: [],
 };
 

@@ -67,7 +67,10 @@ export  function ProfileSummary({ post }: any) {
   const Delete : any= (uid: any,pid : any,id : any) => {
     dispatch(deleteFromProfile(uid,id))
     dispatch(deletePosts(pid)).then(()=> {
-        alert('Post Deleted!')
+        setTimeout(() => {
+            alert('Post Deleted!')
+            window.location.reload()
+        }, 3000);
     })
   }
     return (
@@ -84,7 +87,7 @@ export  function ProfileSummary({ post }: any) {
             <p> {date.toLocaleString("en-US", options)}</p>
           </div>
         </div>
-        <i className="fa fa-trash" aria-hidden="true" onClick={Delete(Cuser.uid,post.post_id,post.id)}></i>
+        <i className="fa fa-trash" aria-hidden="true" onClick={() => Delete(Cuser.uid, post.post_id, post.id)}></i>
         </div>
         <h3 onClick={nav}>{post.Title}</h3>
         <p onClick={nav}>{`${post.Content.substr(0, 300)}...`}</p>

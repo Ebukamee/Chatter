@@ -13,6 +13,7 @@ interface ProjectFormState {
   }
 
 function CreateProjectForm(props:any): any {
+  const [loading,setload] = useState(false)
     const [state, setState] = useState<ProjectFormState>({
         title: "",
         content: "",
@@ -34,7 +35,9 @@ function CreateProjectForm(props:any): any {
       const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (selectedFile) {
+         setload(true)
           props.uploadImage(selectedFile).then(() => {
+            console.log(loading)
             setTimeout(() => {
             props.createPost(state.title,state.content,Cuser.displayName,Cuser.photoURL,Cuser.uid)
           }, 3000);
@@ -43,6 +46,7 @@ function CreateProjectForm(props:any): any {
             props.addToProfile(state.title,state.content,Cuser.uid)
           }, 6000);
           setTimeout(() => {
+            setload(false)
             alert('Post Uploaded Succesfully');
             window.location.replace('/blog')
           }, 11000);
@@ -78,7 +82,7 @@ function CreateProjectForm(props:any): any {
           <div className="input">
             <textarea name="content" id="content"  onChange={handleChanges}  required></textarea>
           </div>
-          <button className="form_button">Create Post</button>
+          <button className="form_button">{loading ? 'Loading...' : 'Create Post'}</button>
         </form>
        </>
     );

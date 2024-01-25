@@ -49,7 +49,7 @@ function CreateProjectForm(props:any): any {
 
          }
         else {
-          console.log('Lol')
+         alert('Add a Cover image')
         }
       };
       const handleChanges = (e: ChangeEvent<HTMLTextAreaElement>) => {

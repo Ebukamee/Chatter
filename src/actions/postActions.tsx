@@ -1,28 +1,10 @@
 import { Dispatch } from "redux";
-// import { RootState } from "../reducer/rootreducer";
-// import { getFirestore } from "redux-firestore";
 import { db, storage } from "../firebase/firebase";
-import { collection,getDocs,doc,addDoc,getDoc,orderBy,query } from "firebase/firestore";
+import { collection,getDocs,doc,addDoc,getDoc,orderBy,query, deleteDoc } from "firebase/firestore";
 import { ref, uploadBytes,getDownloadURL } from "firebase/storage";
-// import { useSelector } from "react-redux";
-// import { getFirebase } from "react-redux-firebase"; 
 
-// export function createPost(post: any) {
-//   return async (dispatch: Dispatch, getState: () => RootState, { getFirestore }: any) => {
-//     const firestore = getFirestore(); // Get the Firestore instance
-//     const firebase = getFirebase(); // Get the Firebase instance
 
-//     try {
-//       // For example, add a document to Firestore
-//       await firestore.collection("posts").add(post);
-      
-//       dispatch({ type: 'CREATE_POST', post });
-//     } catch (error) {
-//         dispatch({ type: 'CREATE_POST_ERROR', error
-//          });
-//     }
-//   };
-// }
+
 export const fetchData = () => async (dispatch: Dispatch) => {
   try {
     const data:any = [];
@@ -85,7 +67,6 @@ catch (error:any) {
 
 export const createPost = (Title: any, Content: any, Author:string,AuthorImage:string, AuthorId: any) => async (dispatch: Dispatch) => {
   try {
-    // Simulating an asynchronous operation with setTimeout (remove this in the actual implementation)
 
     const docRef = await addDoc(collection(db, 'posts'), {
       Title,
@@ -98,7 +79,6 @@ export const createPost = (Title: any, Content: any, Author:string,AuthorImage:s
     });
     PostId = docRef.id
     console.log(PostId)
-    // Assuming you want to dispatch the ID of the newly created document
     dispatch({ type: 'UPLOAD_POST_SUCCESS', payload: docRef});
   } catch (error: any) {
     console.error('Error adding item to Firestore:', error);
@@ -127,6 +107,27 @@ export const addToProfile = (Title: any,Content: any,Id: any) => async () => {
     console.log(error)
   }
 }
+
+export const  deleteFromProfile = (Id : any,id:any) => async ()  =>  {
+  const documentRef = doc(db, `userdetails/posts/${Id}`,id);
+  try {
+           deleteDoc(documentRef);
+           console.log('Document successfully deleted!');
+    } catch (error) {
+      console.error('Error deleting Item', error);
+    }
+}
+export const deletePosts = (Id:any) => async () => {
+  const Ref = doc(db,'posts',Id)
+  try {
+      deleteDoc(Ref)
+      console.log('Succes')
+  }
+  catch(error) {
+      console.log('Error happened during deleting process', error)
+  }
+}
+
 export const getPost = (Id:any) => async (dispatch:Dispatch) => {
   try {
     const data:any =[]

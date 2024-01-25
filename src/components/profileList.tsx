@@ -1,4 +1,4 @@
-import List from "./BlogList";
+import { PageList } from "./BlogList";
 import Load from "./loader";
 import { fetchMyPost } from "../actions/postActions";
 import { connect } from "react-redux";
@@ -13,7 +13,6 @@ import { useEffect } from "react";
         setTimeout(() => {
             console.log(Cuser.uid)
             props.fetchMyPost(Cuser.uid); 
-            // console.log(props)
         }, 5000);// Dispatch the action
       }, [Cuser]);
       const { posts } = props;
@@ -23,7 +22,7 @@ import { useEffect } from "react";
       else if (posts != null && posts.length==0) {
         return <p className="heading">You do not have any post</p>
       }
-      else return <List posts={posts} /> 
+      else return <PageList posts={posts} /> 
 }
 
 const mapStateToProps = (state: any) => {

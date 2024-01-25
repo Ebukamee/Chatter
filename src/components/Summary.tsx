@@ -1,6 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import profile from "../assets/images/profile.png";
-// import moment from "moment"
+import { useSelector } from "react-redux";
+import { deletePosts } from "../actions/postActions";
+import { deleteFromProfile } from "../actions/postActions";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+
+
 export default function Summary({ post }: any) {
   const date = new Date(
     post.PostedOn.seconds * 1000 + post.PostedOn.nanoseconds / 1e6
@@ -15,7 +21,7 @@ export default function Summary({ post }: any) {
   };
   const navigate = useNavigate();
   const nav = () => {
-    navigate(`/post/${post.post_id ? post.post_id : post.id}`);
+    navigate(`/post/${post.id}`);
   };
 
   return (
@@ -37,3 +43,52 @@ export default function Summary({ post }: any) {
     </div>
   );
 }
+
+
+export  function ProfileSummary({ post }: any) {
+    const dispatch = useDispatch<AppDispatch>();
+    const { Cuser } = useSelector((state: any) => state.auth);
+    const date = new Date(
+      post.PostedOn.seconds * 1000 + post.PostedOn.nanoseconds / 1e6
+    );
+    
+    const options: any = {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+    const navigate = useNavigate();
+    const nav = () => {
+      navigate(`/post/${post.post_id}`);
+    };
+  const Delete : any= (uid: any,pid : any,id : any) => {
+    dispatch(deleteFromProfile(uid,id))
+    dispatch(deletePosts(pid)).then(()=> {
+        alert('Post Deleted!')
+    })
+  }
+    return (
+      <div className="post_container">
+        <div className="flex_box">
+        <div className="flex">
+          <img
+            src={Cuser.photoURL}
+            alt=""
+            id="profile"
+          />
+          <div className="details">
+            <h4>{Cuser.displayName}</h4>
+            <p> {date.toLocaleString("en-US", options)}</p>
+          </div>
+        </div>
+        <i className="fa fa-trash" aria-hidden="true" onClick={Delete(Cuser.uid,post.post_id,post.id)}></i>
+        </div>
+        <h3 onClick={nav}>{post.Title}</h3>
+        <p onClick={nav}>{`${post.Content.substr(0, 300)}...`}</p>
+        <img src={post.Url} alt="" className="post" onClick={nav}/>
+      </div>
+    );
+  }

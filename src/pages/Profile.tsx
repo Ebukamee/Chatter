@@ -23,7 +23,7 @@ export default function Profile() {
         <Nav />
         <div className="profile_container">
           <div className="picture_area">
-            <img src={profile} alt="" />
+            <img src={Cuser.photoURL ? Cuser.photoURL : profile} alt="" />
             <h3>{Cuser.displayName}</h3>
             <section className="flex">
               <i className="fa fa-envelope" aria-hidden="true"></i>

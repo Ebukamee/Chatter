@@ -10,7 +10,7 @@ export default function Nav() {
   let [Name,setName] = useState('menu_close')
 
   const Click = () => {
-    if (Menu == Open) {
+    if (Name == "menu_close") {
       setMenu(Close);
       setName('menu')
     } else {

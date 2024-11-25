@@ -39,7 +39,7 @@ export default function Summary({ post }: any) {
       </div>
       <h3>{post.Title}</h3>
       <p>{`${post.Content.substr(0, 300)}...`}</p>
-      <img src={post.Url} alt="" className="post" />
+      {post.Url ? <img src={post.Url} alt="" className="postImage"/> : null}
     </div>
   );
 }
@@ -91,7 +91,7 @@ export  function ProfileSummary({ post }: any) {
         </div>
         <h3 onClick={nav}>{post.Title}</h3>
         <p onClick={nav}>{`${post.Content.substr(0, 300)}...`}</p>
-        <img src={post.Url} alt="" className="post" onClick={nav}/>
+        {post.Url ? <img src={post.Url} alt="" className="postImage"/> : null}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 .postImage {
     width: 100%;
-    max-width: 750px;
+    max-height: 400px;
     object-fit: cover;
     /* height: 20px; */
 }
@@ -21,4 +21,12 @@ div.content {
 }
 h2.title {
     margin-left: 50px;
+}
+
+.comments h2{
+    text-align: center;
+}
+.detail {
+    margin-left: 10px;
+    font-weight: bold;
 }

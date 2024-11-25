@@ -38,6 +38,7 @@ function App() {
       <Route path='/blog' element={<Bloglist />} />
       <Route path='/edit_profile' element={<Edit />} />
       <Route path='/profile' element={<Profile />} />
+      <Route path='/:id' element={<Profile />} />
    </Routes>
     </>
   )

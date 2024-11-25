@@ -7,6 +7,7 @@ import edit from '../assets/images/edit.svg'
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Load from "../components/loader";
+import SearchBar from "../components/SearchBar";
 
 
 
@@ -32,7 +33,9 @@ document.title = 'Chatter | Blog'
         <>
             <Nav />
             <div className="main_box">
+            <SearchBar />
                 <div className="flexbox">
+
                     <div>
                         <h2>Feed</h2>
                         <p>Explore different content you'll love</p>

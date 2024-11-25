@@ -34,7 +34,7 @@ function CreateProjectForm(props:any): any {
       };
       const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (selectedFile) {
+        // if (selectedFile) {
          setload(true)
           props.uploadImage(selectedFile).then(() => {
             console.log(loading)
@@ -51,10 +51,10 @@ function CreateProjectForm(props:any): any {
             window.location.replace('/blog')
           }, 11000);
 
-         }
-        else {
-         alert('Add a Cover image')
-        }
+        //  }
+        // else {
+        //  alert('Add a Cover image')
+        // }
       };
       const handleChanges = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = e.target;

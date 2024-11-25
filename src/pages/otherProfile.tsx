@@ -1,24 +1,24 @@
 import Nav from "../components/Nav";
 import profile from "../assets/images/profile.png";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
-import { logOut } from "../actions/authActions";
+// import { useDispatch } from "react-redux";
+// import { AppDispatch } from "../store";
+// import { logOut } from "../actions/authActions";
 import ProfileList from "../components/profileList";
 import "../assets/styles/profile.css";
-import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+// import { Link } from "react-router-dom";
+
+interface RouteParams {
+    id: string;
+  }
 
 export default function Profile() {
   const { Cuser } = useSelector((state: any) => state.auth);
-  const dispatch = useDispatch<AppDispatch>();
+  const { id } = useParams;
+//   const dispatch = useDispatch<AppDispatch>();
 
-  const handleLogOut = () => {
-    dispatch(logOut()); 
-    if (!Cuser) {
-        window.location.replace('/login')
-    }
-  };
-  if (Cuser) {
+
         return (
       <>
         <Nav />
@@ -30,10 +30,6 @@ export default function Profile() {
               <i className="fa fa-envelope" aria-hidden="true"></i>
               <p>{Cuser.email}</p>
             </section>
-            <div className="flexbox">
-              <button className="login-btn"><Link to='/edit_profile' className="link">Edit Profile</Link></button>
-              <button onClick={handleLogOut}>Log out</button>
-            </div>
           </div>
           <div className="main_box">
               <h3 className="heading">Your Posts</h3>
@@ -42,7 +38,6 @@ export default function Profile() {
         </div>
       </>
     );
-  }
   return <></>;
 }
 

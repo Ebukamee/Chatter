@@ -29,3 +29,7 @@
 .fa-trash {
     color: rgb(128, 10, 10);
 }
+.link {
+    text-decoration: none;
+    color: black;
+}

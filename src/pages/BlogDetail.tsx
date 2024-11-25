@@ -35,6 +35,7 @@ const BlogDetail: React.FC<BlogDetailProps> = (props: any) => {
             const date = new Date(
               post.PostedOn.seconds * 1000 + post.PostedOn.nanoseconds / 1e6
             );
+
             const options: any = {
               month: "long",
               day: "numeric",
@@ -58,7 +59,7 @@ const BlogDetail: React.FC<BlogDetailProps> = (props: any) => {
       </div>
                 <h2 className="title">{post.Title}</h2>
                 <div>
-                  <img src={post.Url} alt="" className="postImage"/>
+                  {post.Url ? <img src={post.Url} alt="" className="postImage"/> : null}
                 </div>
                 <div className="content">{post.Content}</div>
                 <hr />
@@ -66,6 +67,36 @@ const BlogDetail: React.FC<BlogDetailProps> = (props: any) => {
                   <p>Posted by {post.Author ? post.Author : 'Annonymous'}</p>
                   <p> {date.toLocaleString("en-US", options)}</p>
                 </div>
+                
+                <div className="comments">
+                  <h2>Comments</h2>
+  {post.Comments && post.Comments.map((comment: any) => {
+    const date = new Date(comment.PostedOn.seconds * 1000 + comment.PostedOn.nanoseconds / 1e6);
+    const options: any = {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+
+    return (
+      <div className="post_container" key={comment.id}>
+        <div >
+          <div >
+            <div className="details">
+              <h4>{comment.UserName}</h4>
+              <p>{date.toLocaleString("en-US", options)}</p>
+            </div>
+          </div>
+          <p className="detail">{comment.Cotent}</p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
                 <Footer />
               </>
             );

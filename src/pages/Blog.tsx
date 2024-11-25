@@ -7,7 +7,7 @@ import edit from '../assets/images/edit.svg'
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Load from "../components/loader";
-import SearchBar from "../components/SearchBar";
+// import SearchBar from "../components/SearchBar";
 
 
 
@@ -33,7 +33,7 @@ document.title = 'Chatter | Blog'
         <>
             <Nav />
             <div className="main_box">
-            <SearchBar />
+            {/* <SearchBar /> */}
                 <div className="flexbox">
 
                     <div>

@@ -70,6 +70,9 @@ const BlogDetail: React.FC<BlogDetailProps> = (props: any) => {
                 
                 <div className="comments">
                   <h2>Comments</h2>
+      
+  {!post.Comments ? <h2>Be the First to Comment</h2> : null}
+
   {post.Comments && post.Comments.map((comment: any) => {
     const date = new Date(comment.PostedOn.seconds * 1000 + comment.PostedOn.nanoseconds / 1e6);
     const options: any = {
